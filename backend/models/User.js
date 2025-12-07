@@ -44,13 +44,20 @@ const userSchema = new mongoose.Schema({
   timestamps: true // Adds createdAt and updatedAt
 });
 
-// Hash password before saving
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next();
+// Hash password before saving - CLEANEST ASYNC FIX
+userSchema.pre('save', async function() { 
+  // Use a standard function to bind 'this' to the document.
+  // Mongoose automatically handles the promise returned by this async function.
+
+  // Only hash if password is modified
+  if (!this.isModified('password')) {
+    return; // Simply return, don't call next()
+  }
   
+  // No try/catch needed here, as Mongoose handles errors thrown by the promise.
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  next();
+  // No need to call next() at the end!
 });
 
 // Method to compare passwords

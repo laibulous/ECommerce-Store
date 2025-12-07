@@ -3,76 +3,11 @@
 // ============================================
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const Product = require('../models/Product');
 
 dotenv.config();
-
-const users = [
-  {
-    name: 'Admin User',
-    email: 'admin@ecommerce.com',
-    password: 'admin123',
-    role: 'admin',
-    phone: '+1234567890'
-  },
-  {
-    name: 'John Doe',
-    email: 'john@example.com',
-    password: 'password123',
-    role: 'customer',
-    phone: '+1234567891'
-  },
-  {
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    password: 'password123',
-    role: 'customer',
-    phone: '+1234567892'
-  },
-  {
-    name: 'Alice Johnson',
-    email: 'alice@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Bob Williams',
-    email: 'bob@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Charlie Brown',
-    email: 'charlie@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Diana Prince',
-    email: 'diana@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Eve Davis',
-    email: 'eve@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Frank Miller',
-    email: 'frank@example.com',
-    password: 'password123',
-    role: 'customer'
-  },
-  {
-    name: 'Grace Lee',
-    email: 'grace@example.com',
-    password: 'password123',
-    role: 'customer'
-  }
-];
 
 const products = [
   // Electronics
@@ -132,29 +67,121 @@ const products = [
   { name: 'Olaplex Hair Treatment', description: 'Bond building hair treatment', price: 28.00, category: 'Beauty', subcategory: 'Hair Care', brand: 'Olaplex', stock: 100, rating: 4.7, numReviews: 2345 },
   { name: 'Fenty Beauty Foundation', description: 'Pro Filt\'r foundation, multiple shades', price: 39.00, category: 'Beauty', subcategory: 'Makeup', brand: 'Fenty Beauty', stock: 150, rating: 4.6, numReviews: 3456 },
   { name: 'The Ordinary Serum Set', description: 'Skincare serum collection', price: 45.00, category: 'Beauty', subcategory: 'Skincare', brand: 'The Ordinary', stock: 120, rating: 4.7, numReviews: 1890 },
-  { name: 'Chanel No. 5 Perfume', description: 'Classic luxury fragrance', price: 135.00, category: 'Beauty', subcategory: 'Fragrance', brand: 'Chanel', stock: 40, rating: 4.9, numReviews: 567 }
+  { name: 'Chanel No. 5 Perfume', description: 'Classic luxury fragrance', price: 135.00, category: 'Beauty', subcategory: 'Fragrance', brand: 'Chanel', stock: 40, rating: 4.9, numReviews: 567 },
+  { name: 'Tatcha The Water Cream', description: 'Oil-free, anti-aging moisturizer for balanced skin', price: 69.00, category: 'Beauty', subcategory: 'Skincare', brand: 'Tatcha', stock: 75, rating: 4.5, numReviews: 950, featured: true },
+  { name: 'Urban Decay Naked Palette', description: 'Neutral eyeshadow palette with 12 shades', price: 54.00, category: 'Beauty', subcategory: 'Makeup', brand: 'Urban Decay', stock: 110, rating: 4.8, numReviews: 4100, featured: false },
+  { name: 'Revlon One-Step Hair Dryer Brush', description: 'Hot air brush for drying and styling', price: 45.99, category: 'Beauty', subcategory: 'Hair Tools', brand: 'Revlon', stock: 180, rating: 4.6, numReviews: 6800, featured: true },
+  { name: 'Le Labo Santal 33', description: 'Sandalwood and leather unisex eau de parfum', price: 280.00, category: 'Beauty', subcategory: 'Fragrance', brand: 'Le Labo', stock: 30, rating: 4.9, numReviews: 850, featured: true },
+  { name: 'CeraVe Hydrating Cleanser', description: 'Gentle, non-foaming cleanser for normal to dry skin', price: 15.99, category: 'Beauty', subcategory: 'Skincare', brand: 'CeraVe', stock: 250, rating: 4.7, numReviews: 5200, featured: false }
 ];
+
+const hashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
 
 const seedDatabase = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
+    console.log('Connected to MongoDB\n');
     
     console.log('Deleting existing data...');
     await User.deleteMany();
     await Product.deleteMany();
+    console.log('✓ Existing data deleted\n');
     
-    console.log('Seeding users...');
-    const createdUsers = await User.insertMany(users);
-    console.log(`✓ ${createdUsers.length} users created`);
+    console.log('Creating users with hashed passwords...');
+    
+    // Prepare user data with pre-hashed passwords
+    const usersData = [
+      {
+        name: 'Admin User',
+        email: 'admin@ecommerce.com',
+        password: await hashPassword('admin123'),
+        role: 'admin',
+        phone: '+1234567890'
+      },
+      {
+        name: 'John Doe',
+        email: 'john@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567891'
+      },
+      {
+        name: 'Jane Smith',
+        email: 'jane@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567892'
+      },
+      {
+        name: 'Alice Johnson',
+        email: 'alice@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567893'
+      },
+      {
+        name: 'Bob Williams',
+        email: 'bob@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567894'
+      },
+      {
+        name: 'Charlie Brown',
+        email: 'charlie@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567895'
+      },
+      {
+        name: 'Diana Prince',
+        email: 'diana@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567896'
+      },
+      {
+        name: 'Eve Davis',
+        email: 'eve@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567897'
+      },
+      {
+        name: 'Frank Miller',
+        email: 'frank@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567898'
+      },
+      {
+        name: 'Grace Lee',
+        email: 'grace@example.com',
+        password: await hashPassword('password123'),
+        role: 'customer',
+        phone: '+1234567899'
+      }
+    ];
+    
+    // Use insertMany to bypass pre-save middleware
+    const createdUsers = await User.insertMany(usersData);
+    console.log(`✓ ${createdUsers.length} users created\n`);
     
     console.log('Seeding products...');
     const createdProducts = await Product.insertMany(products);
-    console.log(`✓ ${createdProducts.length} products created`);
+    console.log(`✓ ${createdProducts.length} products created\n`);
     
-    console.log('Database seeded successfully!');
+    console.log('✅ Database seeded successfully!\n');
+    console.log('📝 Test Credentials:');
+    console.log('   Admin: admin@ecommerce.com / admin123');
+    console.log('   User:  john@example.com / password123\n');
+    
     process.exit();
   } catch (error) {
-    console.error('Error seeding database:', error);
+    console.error('❌ Error seeding database:', error);
     process.exit(1);
   }
 };
