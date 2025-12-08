@@ -1,6 +1,7 @@
 // ============================================
-// backend/server.js (Updated with auth routes)
+// backend/server.js 
 // ============================================
+
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -15,19 +16,39 @@ connectDB();
 
 const app = express();
 
-// Body parser middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // CORS middleware
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:5173',
   credentials: true
 }));
 
+// Stripe webhook route - MUST come before body parser
+// Stripe needs RAW body for signature verification
+app.use('/api/payment/webhook', 
+  express.raw({ type: 'application/json' }), 
+  (req, res, next) => {
+    require('./controllers/paymentController').handleWebhook(req, res, next);
+  }
+);
+
+// Body parser middleware (after webhook)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// DEBUG: Log all incoming requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/cart', require('./routes/cartRoutes'));
+app.use('/api/orders', require('./routes/orderRoutes'));
+app.use('/api/payment', require('./routes/paymentRoutes'));
+
+console.log('✓ Payment routes mounted at /api/payment');
 
 // Health check route
 app.get('/api/health', (req, res) => {
@@ -45,6 +66,7 @@ app.use((req, res) => {
     message: 'Route not found'
   });
 });
+
 // Error handler (must be last)
 app.use(errorHandler);
 
