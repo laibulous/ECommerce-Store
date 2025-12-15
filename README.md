@@ -152,7 +152,7 @@ http://localhost:5000/api
 | GET | `/orders` | Get all orders | ✅ Admin |
 | PUT | `/orders/:id/status` | Update order status | ✅ Admin |
 
-**Full API documentation:** See `backend/docs/API_DOCUMENTATION.md`
+**Full API documentation:** See `/docs/API_DOCUMENTATION.md`
 
 ---
 
@@ -291,3 +291,4 @@ LinkedIn: [https://www.linkedin.com/in/laiba-nadeem-blyke/](https://www.linkedin
 ---
 
 **If you found this project helpful, please give it a star!**
+
