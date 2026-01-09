@@ -11,6 +11,9 @@
     "test:watch": "jest --watch",
     "test:unit": "jest tests/unit"
   },
+  "engines": {
+  "node": ">=18.0.0"  
+  },
   "keywords": [
     "ecommerce",
     "api",
