@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
         {/* Image */}
         <div className="relative overflow-hidden rounded-lg mb-4 bg-gray-100 aspect-square">
           <img
-            src={product.images?.[0] || 'https://via.placeholder.com/400'}
+            src={product.images?.[0] || 'https://picsum.photos/id/3/400'}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           />

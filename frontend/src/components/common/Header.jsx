@@ -22,8 +22,8 @@ const Header = () => {
       <nav className="container-custom py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-primary-600">
-            ShopHub
+          <Link to="/" className="text-2xl font-bold text-primary-700">
+            SimpleFinds
           </Link>
 
           {/* Desktop Navigation */}

@@ -123,7 +123,7 @@ const ProductDetails = () => {
             <div>
               <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
                 <img
-                  src={product.images?.[0] || 'https://via.placeholder.com/600'}
+                  src={product.images?.[0] || 'https://picsum.photos/id/3/600'}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />

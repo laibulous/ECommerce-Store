@@ -274,7 +274,7 @@ const Checkout = () => {
                 {cart.items.map((item) => (
                   <div key={item._id} className="flex gap-3">
                     <img
-                      src={item.product.images?.[0] || 'https://via.placeholder.com/60'}
+                      src={item.product.images?.[0] || 'https://picsum.photos/id/3/200'}
                       alt={item.product.name}
                       className="w-16 h-16 object-cover rounded"
                     />

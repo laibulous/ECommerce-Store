@@ -84,7 +84,7 @@ const MyOrders = () => {
                     {order.orderItems.slice(0, 2).map((item, index) => (
                       <div key={index} className="flex gap-3">
                         <img
-                          src={item.image || 'https://via.placeholder.com/60'}
+                          src={item.image || 'https://picsum.photos/id/3/60'}
                           alt={item.name}
                           className="w-16 h-16 object-cover rounded"
                         />
@@ -113,11 +113,7 @@ const MyOrders = () => {
                       <Eye className="w-4 h-4" />
                       View Details
                     </Link>
-                    {order.isPaid && (
-                      <button className="btn-outline">
-                        Track Order
-                      </button>
-                    )}
+
                   </div>
                 </div>
               ))}

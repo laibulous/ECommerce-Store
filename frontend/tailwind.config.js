@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 export default {
   content: [
     "./index.html",
@@ -6,22 +8,31 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
+        charcoal: '#1F2933',
+
+        /* SimpleFinds brand palette (Sage-based) */
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-        }
+          50: '#F4F8F6',
+          100: '#E3EFEA',
+          200: '#CFE3DB',
+          300: '#AFCFC3',
+          400: '#8BB7A7',
+          500: '#6B9080',   // MAIN brand color
+          600: '#557A6E',   // Primary buttons
+          700: '#3E5F55',   // Hover states
+          800: '#2F4A43',
+          900: '#1F3530',
+        },
+
+        /* Optional soft neutral accent */
+        sand: '#F3EFEA',
+        darkSand: '#EDF2CB'
       }
     },
   },
   plugins: [],
 }
-

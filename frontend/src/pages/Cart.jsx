@@ -70,7 +70,7 @@ const Cart = () => {
                     className="flex-shrink-0 w-24 h-24 bg-gray-100 rounded-lg overflow-hidden"
                   >
                     <img
-                      src={item.product.images?.[0] || 'https://via.placeholder.com/200'}
+                      src={item.product.images?.[0] || 'https://picsum.photos/id/3/200'}
                       alt={item.product.name}
                       className="w-full h-full object-cover hover:scale-110 transition-transform"
                     />

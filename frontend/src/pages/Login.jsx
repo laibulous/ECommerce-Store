@@ -137,13 +137,13 @@ const Login = () => {
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => setFormData({ email: 'admin@ecommerce.com', password: 'admin123' })}
-                className="text-xs bg-purple-100 text-purple-700 px-3 py-2 rounded hover:bg-purple-200 transition"
+                className="text-xs bg-sand text-black-100 px-3 py-2 rounded hover:bg-primary-200 transition"
               >
                 Admin Account
               </button>
               <button
                 onClick={() => setFormData({ email: 'john@example.com', password: 'password123' })}
-                className="text-xs bg-blue-100 text-blue-700 px-3 py-2 rounded hover:bg-blue-200 transition"
+                className="text-xs bg-sand text-black-100 px-3 py-2 rounded hover:bg-primary-200 transition"
               >
                 Customer Account
               </button>

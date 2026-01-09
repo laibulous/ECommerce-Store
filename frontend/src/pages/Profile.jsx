@@ -21,11 +21,6 @@ const Profile = () => {
     phone: user?.phone || '',
   });
 
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  });
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -44,31 +39,6 @@ const Profile = () => {
     }
   };
 
-  const handlePasswordUpdate = async (e) => {
-    e.preventDefault();
-    setSuccess('');
-    setError('');
-
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setError('New passwords do not match');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await authService.updatePassword({
-        currentPassword: passwordData.currentPassword,
-        newPassword: passwordData.newPassword,
-      });
-      setSuccess('Password updated successfully!');
-      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to update password');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -103,16 +73,6 @@ const Profile = () => {
                 >
                   Profile Information
                 </button>
-                <button
-                  onClick={() => setActiveTab('password')}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition ${
-                    activeTab === 'password'
-                      ? 'bg-primary-50 text-primary-600 font-medium'
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  Change Password
-                </button>
               </nav>
             </div>
           </div>
@@ -123,7 +83,7 @@ const Profile = () => {
               {success && <SuccessMessage message={success} />}
               {error && <ErrorMessage message={error} />}
 
-              {activeTab === 'profile' ? (
+
                 <form onSubmit={handleProfileUpdate} className="space-y-6 mt-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -180,71 +140,6 @@ const Profile = () => {
                     {loading ? 'Updating...' : 'Update Profile'}
                   </button>
                 </form>
-              ) : (
-                <form onSubmit={handlePasswordUpdate} className="space-y-6 mt-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Current Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                      <input
-                        type="password"
-                        value={passwordData.currentPassword}
-                        onChange={(e) =>
-                          setPasswordData({ ...passwordData, currentPassword: e.target.value })
-                        }
-                        className="input-field pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      New Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                      <input
-                        type="password"
-                        value={passwordData.newPassword}
-                        onChange={(e) =>
-                          setPasswordData({ ...passwordData, newPassword: e.target.value })
-                        }
-                        className="input-field pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Confirm New Password
-                    </label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                      <input
-                        type="password"
-                        value={passwordData.confirmPassword}
-                        onChange={(e) =>
-                          setPasswordData({ ...passwordData, confirmPassword: e.target.value })
-                        }
-                        className="input-field pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn-primary disabled:opacity-50"
-                  >
-                    {loading ? 'Updating...' : 'Update Password'}
-                  </button>
-                </form>
-              )}
             </div>
           </div>
         </div>

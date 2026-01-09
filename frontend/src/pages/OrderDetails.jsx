@@ -80,7 +80,7 @@ const OrderDetails = () => {
               {order.orderItems.map((item, index) => (
                 <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
                   <img
-                    src={item.image || 'https://via.placeholder.com/100'}
+                    src={item.image || 'https://picsum.photos/id/3/100'}
                     alt={item.name}
                     className="w-24 h-24 object-cover rounded"
                   />
