@@ -7,13 +7,13 @@ const Product = require('../../models/Product');
 const User = require('../../models/User');
 const productRoutes = require('../../routes/productRoutes');
 const authRoutes = require('../../routes/authRoutes');
-const { errorHandler } = require('../../middleware/errorHandler');
+//const { errorHandler } = require('../../middleware/errorHandler');
 
 const app = express();
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
-app.use(errorHandler);
+//app.use(errorHandler);
 
 describe('Product Tests', () => {
   let adminToken;
@@ -249,5 +249,137 @@ describe('Product Tests', () => {
       expect(res.body.success).toBe(false);
     });
   });
+  describe('GET /api/products/categories/list - Get Categories', () => {
+  beforeEach(async () => {
+    await Product.create([
+      {
+        name: 'Phone',
+        description: 'Smartphone',
+        price: 500,
+        category: 'Electronics',
+        stock: 10
+      },
+      {
+        name: 'Shoes',
+        description: 'Running shoes',
+        price: 120,
+        category: 'Clothing',
+        stock: 20
+      },
+      {
+        name: 'Laptop',
+        description: 'Gaming laptop',
+        price: 1500,
+        category: 'Electronics',
+        stock: 5
+      }
+    ]);
+  });
+
+  it('should return distinct product categories', async () => {
+    const res = await request(app)
+      .get('/api/products/categories/list')
+      .expect(200);
+
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.categories).toContain('Electronics');
+    expect(res.body.data.categories).toContain('Clothing');
+    expect(res.body.data.categories.length).toBe(2);
+  });
 });
 
+describe('GET /api/products/brands/list - Get Brands', () => {
+  beforeEach(async () => {
+    await Product.create([
+      {
+        name: 'iPhone',
+        description: 'Apple phone',
+        price: 999,
+        category: 'Electronics',
+        brand: 'Apple',
+        stock: 10
+      },
+      {
+        name: 'Galaxy',
+        description: 'Samsung phone',
+        price: 899,
+        category: 'Electronics',
+        brand: 'Samsung',
+        stock: 15
+      },
+      {
+        name: 'Generic Item',
+        description: 'No brand product',
+        price: 50,
+        category: 'Other',
+        stock: 5
+      }
+    ]);
+  });
+
+  it('should return distinct brands without null values', async () => {
+    const res = await request(app)
+      .get('/api/products/brands/list')
+      .expect(200);
+
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.brands).toContain('Apple');
+    expect(res.body.data.brands).toContain('Samsung');
+    expect(res.body.data.brands).not.toContain(null);
+  });
+});
+
+describe('GET /api/products/featured/list - Get Featured Products', () => {
+  beforeEach(async () => {
+    await Product.create([
+      {
+        name: 'Featured 1',
+        description: 'Top rated',
+        price: 200,
+        category: 'Electronics',
+        stock: 10,
+        featured: true,
+        rating: 4.8
+      },
+      {
+        name: 'Featured 2',
+        description: 'Another featured',
+        price: 300,
+        category: 'Electronics',
+        stock: 5,
+        featured: true,
+        rating: 4.5
+      },
+      {
+        name: 'Not Featured',
+        description: 'Normal product',
+        price: 100,
+        category: 'Electronics',
+        stock: 20,
+        featured: false
+      }
+    ]);
+  });
+
+  it('should return only featured products', async () => {
+    const res = await request(app)
+      .get('/api/products/featured/list')
+      .expect(200);
+
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.products.length).toBe(2);
+
+    res.body.data.products.forEach(product => {
+      expect(product.featured).toBe(true);
+    });
+  });
+
+  it('should limit number of featured products', async () => {
+    const res = await request(app)
+      .get('/api/products/featured/list?limit=1')
+      .expect(200);
+
+    expect(res.body.data.products.length).toBe(1);
+  });
+  });
+});

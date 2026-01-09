@@ -1,22 +1,18 @@
 // ============================================
-// backend/tests/setup.js
+// backend/tests/setup.js - Test Configuration
 // ============================================
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env.test') });
+require('dotenv').config();
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let mongoServer;
 
-// Connect to in-memory database before tests
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-  
-  await mongoose.connect(mongoUri);
-});
+  const uri = mongoServer.getUri();
+  await mongoose.connect(uri); 
+}, 30000);
 
-// Clear database after each test
 afterEach(async () => {
   const collections = mongoose.connection.collections;
   for (const key in collections) {
@@ -24,8 +20,7 @@ afterEach(async () => {
   }
 });
 
-// Disconnect and stop server after all tests
 afterAll(async () => {
   await mongoose.disconnect();
   await mongoServer.stop();
-});
+}, 30000);

@@ -9,7 +9,9 @@ const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorHandler');
 
 // Load env vars
-dotenv.config();
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 // Connect to database
 connectDB();

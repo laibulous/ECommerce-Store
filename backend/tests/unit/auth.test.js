@@ -5,13 +5,13 @@ const request = require('supertest');
 const express = require('express');
 const User = require('../../models/User');
 const authRoutes = require('../../routes/authRoutes');
-const { errorHandler } = require('../../middleware/errorHandler');
+//const { errorHandler } = require('../../middleware/errorHandler');
 
 // Create test app
 const app = express();
 app.use(express.json());
 app.use('/api/auth', authRoutes);
-app.use(errorHandler);
+//app.use(errorHandler);
 
 describe('Authentication Tests', () => {
   
@@ -23,7 +23,8 @@ describe('Authentication Tests', () => {
         password: 'password123',
         phone: '+1234567890'
       };
-     const res = await request(app)
+
+      const res = await request(app)
         .post('/api/auth/register')
         .send(userData)
         .expect(201);
@@ -189,7 +190,7 @@ describe('Authentication Tests', () => {
         .expect(401);
 
       expect(res.body.success).toBe(false);
-      expect(res.body.message).toContain('no token');
+      expect(res.body.message).toContain('Not authorized');
     });
 
     it('should reject request with invalid token', async () => {

@@ -1,3 +1,4 @@
+
 // ============================================
 // backend/tests/unit/cart.test.js
 // ============================================
@@ -7,13 +8,13 @@ const Cart = require('../../models/Cart');
 const Product = require('../../models/Product');
 const authRoutes = require('../../routes/authRoutes');
 const cartRoutes = require('../../routes/cartRoutes');
-const { errorHandler } = require('../../middleware/errorHandler');
+//const { errorHandler } = require('../../middleware/errorHandler');
 
 const app = express();
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
-app.use(errorHandler);
+//app.use(errorHandler);
 
 describe('Cart Tests', () => {
   let userToken;

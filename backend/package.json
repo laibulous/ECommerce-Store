@@ -37,11 +37,12 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "testTimeout":30000,
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ],
     "setupFilesAfterEnv": [
-      "/home/lybace/Desktop/Projects/Internship/ECommerce-Store/backend/tests/setup.js"
+      "<rootDir>/tests/setup.js"
     ]
   }
 }

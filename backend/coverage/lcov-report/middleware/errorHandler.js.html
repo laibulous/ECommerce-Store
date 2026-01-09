@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">4.54% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/22</span>
+                <span class='fraction'>1/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">47.61% </span>
+                <span class="strong">4.76% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/21</span>
+                <span class='fraction'>1/21</span>
             </div>
         
             
@@ -114,43 +114,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,46 +160,46 @@
 // ============================================
 &nbsp;
 // Global error handler middleware
-exports.errorHandler = (err, req, res, next) =&gt; {
-  let error = { ...err };
-  error.message = err.message;
+exports.errorHandler = <span class="fstat-no" title="function not covered" >(e</span>rr, req, res, next) =&gt; {
+  let error = <span class="cstat-no" title="statement not covered" >{ ...err };</span>
+<span class="cstat-no" title="statement not covered" >  error.message = err.message;</span>
 &nbsp;
   // Log error for debugging
-  console.error(err);
+<span class="cstat-no" title="statement not covered" >  console.error(err);</span>
 &nbsp;
   // Mongoose bad ObjectId
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === 'CastError') {
+<span class="cstat-no" title="statement not covered" >  if (err.name === 'CastError') {</span>
     const message = <span class="cstat-no" title="statement not covered" >'Resource not found';</span>
 <span class="cstat-no" title="statement not covered" >    error = { message, statusCode: 404 };</span>
   }
 &nbsp;
   // Mongoose duplicate key
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (err.code === 11000) {
+<span class="cstat-no" title="statement not covered" >  if (err.code === 11000) {</span>
     const field = <span class="cstat-no" title="statement not covered" >Object.keys(err.keyValue)[0];</span>
     const message = <span class="cstat-no" title="statement not covered" >`${field.charAt(0).toUpperCase() + field.slice(1)} already exists`;</span>
 <span class="cstat-no" title="statement not covered" >    error = { message, statusCode: 400 };</span>
   }
 &nbsp;
   // Mongoose validation error
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === 'ValidationError') {
+<span class="cstat-no" title="statement not covered" >  if (err.name === 'ValidationError') {</span>
     const message = <span class="cstat-no" title="statement not covered" >Object.values(err.errors).map(<span class="fstat-no" title="function not covered" >va</span>l =&gt; <span class="cstat-no" title="statement not covered" >val.message)</span>.join(', ');</span>
 <span class="cstat-no" title="statement not covered" >    error = { message, statusCode: 400 };</span>
   }
   // JWT errors
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === 'JsonWebTokenError') {
+<span class="cstat-no" title="statement not covered" >  if (err.name === 'JsonWebTokenError') {</span>
     const message = <span class="cstat-no" title="statement not covered" >'Invalid token';</span>
 <span class="cstat-no" title="statement not covered" >    error = { message, statusCode: 401 };</span>
   }
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (err.name === 'TokenExpiredError') {
+<span class="cstat-no" title="statement not covered" >  if (err.name === 'TokenExpiredError') {</span>
     const message = <span class="cstat-no" title="statement not covered" >'Token expired';</span>
 <span class="cstat-no" title="statement not covered" >    error = { message, statusCode: 401 };</span>
   }
 &nbsp;
-  res.status(error.statusCode || 500).json({
+<span class="cstat-no" title="statement not covered" >  res.status(error.statusCode || 500).json({</span>
     success: false,
-    message: error.message || <span class="branch-1 cbranch-no" title="branch not covered" >'Server Error',</span>
-    ...(process.env.NODE_ENV === 'development' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >{ stack: err.stack })</span>
+    message: error.message || 'Server Error',
+    ...(process.env.NODE_ENV === 'development' &amp;&amp; { stack: err.stack })
   });
 };</pre></td></tr></table></pre>
 
@@ -208,7 +208,7 @@ exports.errorHandler = (err, req, res, next) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-09T00:54:39.335Z
+                at 2026-01-09T16:53:36.795Z
             </div>
         <script src="../prettify.js"></script>
         <script>
