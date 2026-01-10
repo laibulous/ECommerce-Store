@@ -24,8 +24,6 @@ app.use(cors({
   credentials: true
 }));
 
-// Stripe webhook route - MUST come before body parser
-// Stripe needs RAW body for signature verification
 app.use('/api/payment/webhook', 
   express.raw({ type: 'application/json' }), 
   (req, res, next) => {
