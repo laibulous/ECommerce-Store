@@ -2,8 +2,6 @@
 
 A modern, full-featured e-commerce web application built with the MERN stack, featuring secure payment processing, real-time cart management, and an intuitive admin dashboard.
 
-Check out the live website here: [https://simple-finds.netlify.app](https://simple-finds.netlify.app)
-
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)](https://www.mongodb.com/)
 [![Express.js](https://img.shields.io/badge/Express.js-4.x-lightgrey)](https://expressjs.com/)
 [![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/)
@@ -12,6 +10,8 @@ Check out the live website here: [https://simple-finds.netlify.app](https://simp
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38bdf8)](https://tailwindcss.com/)
 
 > Developed as part of SkilledScore Software Engineering Internship Program
+
+Check out the live website here: [https://simple-finds.netlify.app](https://simple-finds.netlify.app)
 
 ## Features
 
@@ -293,5 +293,6 @@ LinkedIn: [https://www.linkedin.com/in/laiba-nadeem-blyke/](https://www.linkedin
 ---
 
 **If you found this project helpful, please give it a star!**
+
 
 
