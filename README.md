@@ -33,7 +33,7 @@ Check out the live website here: [https://simple-finds.netlify.app](https://simp
 - **Performance** - Optimized with pagination, lazy loading
 - **Responsive Design** - Mobile-first approach with Tailwind CSS
 - **Security** - Bcrypt password hashing, JWT tokens, input validation
-- **Testing** - 28 unit tests with >80% code coverage
+- **Testing** - 46 unit tests with >80% code coverage
 - **UI/UX** - Modern, intuitive interface with smooth animations
 
 ---
@@ -102,7 +102,7 @@ npm test                 # Run all tests
 npm run test:watch      # Watch mode
 ```
 
-**Test Coverage:** >80% (28 unit tests covering authentication, products, cart)
+**Test Coverage:** >80% (46 unit tests covering authentication, products, cart)
 
 **Test Credentials:**
 - Admin: `admin@ecommerce.com` / `admin123`
@@ -195,8 +195,9 @@ http://localhost:5000/api
 **Products**
 ```
 - name, description, price
-- category, brand, stock
+- category, subcategory, brand, stock
 - images[], rating, numReviews
+- featured, tags
 ```
 
 **Carts**
@@ -208,9 +209,9 @@ http://localhost:5000/api
 **Orders**
 ```
 - user (ref), orderItems[]
-- shippingAddress, paymentMethod
+- shippingAddress, paymentMethod, paymentResult
 - prices (items, tax, shipping, total)
-- status, isPaid, isDelivered
+- status, isPaid,paidAt, isDelivered, deliveredAt
 ```
 
 ---
@@ -293,6 +294,7 @@ LinkedIn: [https://www.linkedin.com/in/laiba-nadeem-blyke/](https://www.linkedin
 ---
 
 **If you found this project helpful, please give it a star!**
+
 
 
 
