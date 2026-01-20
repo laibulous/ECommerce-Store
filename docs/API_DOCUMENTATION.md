@@ -991,26 +991,17 @@ POST /products (admin token required)
 # Update order status
 PUT /orders/:id/status (admin token required)
 ```
-
----
-
-## Rate Limiting
-
-Currently not implemented. Consider adding rate limiting in production:
-- Authentication endpoints: 5 requests/minute
-- General endpoints: 100 requests/minute
-
 ---
 
 ## Notes
 
 - All timestamps are in ISO 8601 format (UTC)
 - Prices are in USD with 2 decimal places
-- Product images are URLs (consider CDN in production)
+- Product images are URLs 
 - Webhook endpoint uses raw body for signature verification
 
 ---
 
 **Version:** 1.0.0  
-**Last Updated:** December 2024  
-**Contact:** support@ecommerce.com
+**Last Updated:** January 2026  
+**Contact:** miss.laiba.nadeem@gmail.com
