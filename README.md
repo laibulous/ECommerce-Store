@@ -95,6 +95,57 @@ VITE_STRIPE_PUBLIC_KEY=pk_test_...
 
 ---
 
+## Dependencies
+
+This repo has two packages: `backend/` and `frontend/`. See the `package.json` files for exact versions:
+
+- **Backend:** [`backend/package.json`](./backend/package.json)
+- **Frontend:** [`frontend/package.json`](./frontend/package.json)
+
+### Backend (Core)
+`bcryptjs`, `cors`, `dotenv`, `express`, `express-validator`, `jsonwebtoken`, `mongoose`, `stripe`
+
+### Frontend (Core)
+`@stripe/react-stripe-js`, `@stripe/stripe-js`, `axios`, `lucide-react`, `react`, `react-dom`, `react-hook-form`, `react-router-dom`, `zustand`
+
+## Quick Commands
+
+### Backend
+**Install:**
+```bash
+cd backend && npm install
+
+```
+
+**Run (Dev):**
+
+```bash
+cd backend && npm run dev
+
+```
+
+### Frontend
+
+**Install:**
+
+```bash
+cd frontend && npm install
+
+```
+
+**Run (Dev):**
+
+```bash
+cd frontend && npm run dev
+
+```
+
+*Refer to each `package.json` for `devDependencies` and exact versions.*
+
+```
+
+```
+
 ## Testing
 ```bash
 cd backend
@@ -294,6 +345,7 @@ LinkedIn: [https://www.linkedin.com/in/laiba-nadeem-blyke/](https://www.linkedin
 ---
 
 **If you found this project helpful, please give it a star!**
+
 
 
 
